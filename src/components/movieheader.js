@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+import data from 'data';
 
 
 class MovieHeader extends Component {
@@ -13,11 +14,15 @@ class MovieHeader extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.prePopulateMovies( data );
+  }
+
 
   blankMovie = () => {
     return {
       movieTitle: '',
-      movieURL: '',
+      moviePosterURL: '',
       description: '',
       genre: ''
     }
@@ -46,7 +51,6 @@ class MovieHeader extends Component {
   render() {
     return (
       <Fragment>
-        <h4>Header</h4>
         <form className="findMovie">
           <input
             type="text"
@@ -56,11 +60,12 @@ class MovieHeader extends Component {
             value={ this.state.filteredMovieTitle }
           />
         </form>
-        <button onClick={ this.handleAddMovieClick }>Add Movie</button>
+        <button className="addMovie" onClick={ this.handleAddMovieClick }>Add Movie</button>
         { this.state.showMovieForm &&
         <form className="addMovieForm" onSubmit={ this.handleAddMovieSubmit }>
           <h4>Add Movie</h4>
           <input
+            type="text"
             placeholder="Movie Title"
             name="movieTitle"
             required={ true }
@@ -68,20 +73,23 @@ class MovieHeader extends Component {
             onChange = { e =>  this.setState( { movie: { ...this.state.movie, movieTitle: e.target.value } } ) }
           />
           <input
+            type="text"
             placeholder="Movie Poster URL"
             name="moviePoster"
             required={ true }
-            value={ this.state.movie.movieURL }
-            onChange = { e =>  this.setState( { movie: { ...this.state.movie, movieURL: e.target.value } } ) }
+            value={ this.state.movie.moviePosterURL }
+            onChange = { e =>  this.setState( { movie: { ...this.state.movie, moviePosterURL: e.target.value } } ) }
           />
           <input
+            type="text"
             placeholder="Description"
             name="description"
             value={ this.state.movie.description }
             onChange = { e =>  this.setState( { movie: { ...this.state.movie, description: e.target.value } } ) }
           />
           <input
-            palceholder="Genre(s)"
+            type="text"
+            placeholder="Genre"
             name="genre"
             value={ this.state.movie.genre }
             onChange = { e =>  this.setState( { movie: { ...this.state.movie, genre: e.target.value } } ) }

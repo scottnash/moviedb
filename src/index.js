@@ -7,8 +7,6 @@ import reduxPromise from 'redux-promise';
 import * as serviceWorker from './serviceWorker';
 import App from 'components/App';
 
-import './index.scss';
-
 const store = createStore(
   reducers,
   {},

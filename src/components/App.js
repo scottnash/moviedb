@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 
 import Genres from 'components/genres';
 import MovieHeader from 'components/movieheader';
